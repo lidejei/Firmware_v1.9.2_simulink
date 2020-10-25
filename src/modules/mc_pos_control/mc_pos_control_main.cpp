@@ -525,6 +525,7 @@ MulticopterPositionControl::print_status()
 void
 MulticopterPositionControl::run()
 {
+	PX4_INFO("Running, mc_poscontrol_run");	
 	hrt_abstime time_stamp_last_loop = hrt_absolute_time(); // time stamp of last loop iteration
 
 	// initialize all subscriptions

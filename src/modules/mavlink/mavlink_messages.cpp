@@ -3042,6 +3042,12 @@ protected:
 							/* send 0 when disarmed and for disabled channels */
 							msg.controls[i] = 0.0f;
 						}
+                       /*     PX4_INFO("msgcontrol1:\t%8.4f\t control2:%8.4f\t control3:%8.4f control4:%8.4f\t",
+                                 (double)msg.controls[0],
+                                 (double)msg.controls[1],
+                                 (double)msg.controls[2],
+                                 (double)msg.controls[3]);
+*/
 					}
 
 				} else {

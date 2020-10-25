@@ -261,7 +261,7 @@ PARAM_DEFINE_INT32(SYS_HAS_MAG, 1);
  *
  * @group System
  */
-PARAM_DEFINE_INT32(SYS_HAS_BARO, 1);
+PARAM_DEFINE_INT32(SYS_HAS_BARO, 0);
 
 /**
  * Bootloader update
@@ -284,3 +284,17 @@ PARAM_DEFINE_INT32(SYS_HAS_BARO, 1);
  * @group System
  */
 PARAM_DEFINE_INT32(SYS_BL_UPDATE, 0);
+
+/**
+ * Automatically configure attitude controller.
+ *
+ * Set to 0 mc_att_controll controller.  set to 1 to mc_att_advance controller
+ * Platform-specific values are used if available.
+ *
+ * @min 0
+ * @max 1
+ * @value 0 mc_att_controll
+ * @value 1 mc_att_linear_pid
+ * @group System
+ */
+PARAM_DEFINE_INT32(SYS_MC_ATT, 0);

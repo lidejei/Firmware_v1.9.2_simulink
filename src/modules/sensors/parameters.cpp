@@ -183,6 +183,7 @@ void initialize_parameter_handles(ParameterHandles &parameter_handles)
 	(void)param_find("SYS_PARAM_VER");
 	(void)param_find("SYS_AUTOSTART");
 	(void)param_find("SYS_AUTOCONFIG");
+	(void)param_find("SYS_MC_ATT");
 	(void)param_find("TRIG_MODE");
 	(void)param_find("UAVCAN_ENABLE");
 

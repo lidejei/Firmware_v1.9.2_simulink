@@ -526,10 +526,14 @@ MulticopterAttitudeControl::control_attitude()
 		Quatf().copyTo(_v_att_sp.q_d);
 		Vector3f().copyTo(_v_att_sp.thrust_body);
 	}
-
+	
 	// physical thrust axis is the negative of body z axis
 	_thrust_sp = -_v_att_sp.thrust_body[2];
-
+/*	PX4_INFO("desire_Ang:\t%8.4f\t%8.4f\t%8.4f",
+		 (double)_v_att_sp.roll_body,
+		 (double)_v_att_sp.pitch_body,
+		 (double)_v_att_sp.yaw_body);
+*/
 	_rates_sp = _attitude_control.update(Quatf(_v_att.q), Quatf(_v_att_sp.q_d), _v_att_sp.yaw_sp_move_rate);
 }
 
@@ -707,7 +711,12 @@ MulticopterAttitudeControl::publish_actuator_controls()
 	_actuators.control[7] = (float)_landing_gear.landing_gear;
 	_actuators.timestamp = hrt_absolute_time();
 	_actuators.timestamp_sample = _sensor_gyro.timestamp;
-
+/*
+	PX4_INFO("output_pwm:\t%8.2f\t%8.2f\t%8.2f",
+		 (double)_actuators.control[0],
+		 (double)_actuators.control[1],
+		 (double)_actuators.control[2]);
+*/
 	/* scale effort by battery status */
 	if (_param_mc_bat_scale_en.get() && _battery_status.scale > 0.0f) {
 		for (int i = 0; i < 4; i++) {
@@ -761,6 +770,14 @@ MulticopterAttitudeControl::run()
 	float attitude_dt = 0.f;
 
 	while (!should_exit()) {
+		// make the choice of the controller, the value is not updated in the air
+/*		int32_t att_controller_choice;
+
+		param_get(param_find("SYS_MC_ATT"), &att_controller_choice);
+		if (att_controller_choice != 0 && !_v_control_mode.flag_armed) {
+			return;
+		}
+*/
 
 		// check if the selected gyro has updated first
 		sensor_correction_poll();
